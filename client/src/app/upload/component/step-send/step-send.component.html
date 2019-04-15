@@ -1,0 +1,6 @@
+<ng-container *ngIf="loading; else loader">
+  done
+</ng-container>
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>

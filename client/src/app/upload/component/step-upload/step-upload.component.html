@@ -1,0 +1,4 @@
+<ngx-dropzone #dropzone [multiple]="false"
+                        [label]="file ? file.name : 'Drop your csv file here (or click)'"
+                        (filesAdded)="onFileAdded($event)">
+</ngx-dropzone>

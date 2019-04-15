@@ -1,0 +1,13 @@
+<div class="snack-info">
+
+  <ng-container [ngSwitch]="type">
+    <mat-icon *ngSwitchCase="snackBarType.success">check_circle</mat-icon>
+    <mat-icon *ngSwitchCase="snackBarType.warning">warning</mat-icon>
+    <mat-icon *ngSwitchCase="snackBarType.error">info</mat-icon>
+    <mat-icon *ngSwitchCase="snackBarType.info">info</mat-icon>
+  </ng-container>
+
+  <div>{{message}}</div>
+</div>
+
+<button fxFlex="0 0 auto" mat-icon-button (click)="snackBarRef.dismissWithAction()"><mat-icon>close</mat-icon></button>

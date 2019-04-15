@@ -1,0 +1,26 @@
+:host {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: white;
+
+  as-split-area{
+    display: flex;
+    flex-direction: column;
+  }
+
+  ::ng-deep .as-split-gutter{
+    border-left: 1px solid rgba(0,0,0,0.1);
+    border-right: 1px solid rgba(0,0,0,0.1);
+  }
+
+  .table-toolbar{
+    //border-bottom:1px solid rgba(0,0,0,.12);
+    z-index: 999;
+  }
+  .criteria-toolbar{
+    background: none;
+    z-index: 999;
+    //border-bottom:1px solid rgba(0,0,0,.12);
+  }
+}

@@ -1,0 +1,40 @@
+<ng-container *ngIf="data; else loader">
+  <as-split gutterSize="20"  [direction]="'vertical'">
+
+    <as-split-area size="50" *ngIf="error">
+      <div>
+        <pre [textContent]="error">
+        </pre>
+      </div>
+    </as-split-area>
+
+
+    <as-split-area size="50">
+      <cdk-virtual-scroll-viewport itemSize="48" class="viewport">
+        <mat-list role="list">
+          <mat-list-item *cdkVirtualFor="let item of array; let i = index" class="item">
+            <span>{{i}}</span>
+            <span>{{item.date}}</span>
+            <span>{{item.title}}</span>
+            <span>{{item.seo_title}}</span>
+            <span>{{item.url}}</span>
+            <span>{{item.author}}</span>
+            <span>{{item.category}}</span>
+            <span>{{item.locales}}</span>
+            <span>{{item.content}}</span>
+          </mat-list-item>
+        </mat-list>
+      </cdk-virtual-scroll-viewport>
+    </as-split-area>
+  </as-split>
+
+  <mat-toolbar color="primary">
+    <button mat-flat-button color="warn" (click)="modify()">Another</button>
+    <button mat-flat-button color="accent" (click)="send()" [disabled]="error">Send {{array.length}} items</button>
+  </mat-toolbar>
+
+</ng-container>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>

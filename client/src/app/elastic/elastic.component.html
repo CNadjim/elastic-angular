@@ -1,0 +1,32 @@
+
+<as-split gutterSize="20" [useTransition]="true" direction="horizontal"  >
+
+  <as-split-area [size]="40" [visible]="criteriaVisible" order="1">
+
+    <mat-toolbar class="criteria-toolbar mat-elevation-z1" fxLayoutAlign="flex-end center">
+      <div fxFlex="1 0 auto">
+        Elasticsearch configuration
+      </div>
+      <button mat-icon-button *ngIf="criteriaVisible" (click)="criteriaVisible = false">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+      </button>
+    </mat-toolbar>
+
+    <app-criteria></app-criteria>
+  </as-split-area>
+
+  <as-split-area [size]="60" order="2">
+
+    <mat-toolbar fxLayoutGap="20px" class="table-toolbar mat-elevation-z1">
+      <button mat-icon-button  (click)="criteriaVisible = !criteriaVisible">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <div fxFlex="1 0 auto" fxLayoutAlign="center center">
+        Elasticsearch result
+      </div>
+    </mat-toolbar>
+
+    <app-table></app-table>
+
+  </as-split-area>
+</as-split>

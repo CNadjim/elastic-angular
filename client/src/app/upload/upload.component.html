@@ -1,0 +1,5 @@
+<ng-container [ngSwitch]="currentStep">
+  <app-step-upload *ngSwitchCase="'step-upload'"></app-step-upload>
+  <app-step-preview *ngSwitchCase="'step-preview'"></app-step-preview>
+  <app-step-send *ngSwitchCase="'step-send'"></app-step-send>
+</ng-container>

@@ -1,0 +1,70 @@
+
+<as-split gutterSize="20" [useTransition]="true" direction="horizontal"  >
+
+  <as-split-area [size]="50"  order="1">
+    <ng-container *ngIf="dataSource">
+
+      <mat-toolbar class="custom-toolbar" fxLayoutGap="10px">
+        <span>
+        index size : [{{resultSearch.hits.total}}]
+        </span>
+
+        <span>
+         result size : [{{dataSource.length}}]
+        </span>
+        <span>
+         search time : [{{resultSearch.took}}ms]
+        </span>
+      </mat-toolbar>
+      <mat-nav-list>
+        <cdk-virtual-scroll-viewport [itemSize]="50">
+
+          <mat-list-item *cdkVirtualFor="let item of dataSource; index as i" (click)="selectRow(item)"
+                         [class.selected]="selectedRow == item">
+            <span mat-list-icon>{{i+1}}</span>
+            <a matLine>{{item.title}}</a>
+            <button mat-icon-button>
+              <mat-icon>info</mat-icon>
+            </button>
+          </mat-list-item>
+
+        </cdk-virtual-scroll-viewport>
+      </mat-nav-list>
+    </ng-container>
+
+
+    <ng-container *ngIf="!dataSource && onSearch">
+      <div fxFlex="0 0 80px"  >
+        <app-loader></app-loader>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="!dataSource && !onSearch">
+      <div fxFlex fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="15px">
+        <mat-icon style="font-size: 150px;height: 150px;width: 150px;">cancel</mat-icon>
+        <h4>No data</h4>
+      </div>
+    </ng-container>
+  </as-split-area>
+
+  <as-split-area [size]="50" [visible]="detailVisible" order="2">
+    <div class="detail-content">
+      <mat-toolbar fxLayoutAlign="flex-start center">
+        <button mat-icon-button (click)="detailVisible = false">
+          <mat-icon>keyboard_arrow_right</mat-icon>
+        </button>
+        <div fxFlex="1 0 auto" fxLayoutAlign="center center">
+          Details
+        </div>
+      </mat-toolbar>
+
+
+      <mat-list *ngIf="selectedRow">
+        <mat-list-item class="listitem" *ngFor="let column of  displayedColumns">
+          <span style="margin-bottom: 10px"><b>{{column}}</b></span>
+          <span>{{selectedRow[column]}}</span>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </as-split-area>
+</as-split>
+

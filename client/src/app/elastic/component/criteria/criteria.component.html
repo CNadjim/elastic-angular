@@ -1,0 +1,72 @@
+<div class="content">
+  <mat-accordion>
+    <mat-expansion-panel >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Client configuration
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div fxLayout="row wrap" fxLayoutGap="10px">
+
+        <mat-form-field appearance="fill">
+          <input matInput placeholder="elastic url" disabled [(ngModel)]="elasticUrl">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <input matInput placeholder="elastic index" [(ngModel)]="index">
+        </mat-form-field>
+
+      </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Query configuration
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div fxLayout="row wrap" fxLayoutGap="10px">
+
+        <mat-form-field appearance="fill">
+          <input matInput placeholder="elastic search from" type="number"  [(ngModel)]="query.from">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <input matInput placeholder="elastic search size" type="number" [(ngModel)]="query.size">
+        </mat-form-field>
+      </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Query selection
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-form-field>
+        <mat-label>Question</mat-label>
+        <mat-select  [(ngModel)]="selectedQuestion" >
+          <mat-option *ngFor="let question of questions" [value]="question" (click)="selectQuestion(question)">
+            {{question.label}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-expansion-panel>
+
+
+  </mat-accordion>
+</div>
+<div class="editor mat-elevation-z10" *ngIf="query">
+
+  <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
+
+</div>
+<div fxLayout="row">
+  <!--
+  <mat-toolbar class="criteria-toolbar cancel" fxLayoutAlign="center center" mat-ripple (click)="ngOnInit()">
+    Cancel
+  </mat-toolbar>-->
+  <mat-toolbar class="criteria-toolbar update" fxLayoutAlign="center center" mat-ripple (click)="save()">
+    Save
+  </mat-toolbar>
+</div>
+
