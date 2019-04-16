@@ -1,1 +1,1 @@
-FROM kibana:5
+FROM docker.elastic.co/elasticsearch/elasticsearch:7.0.0
