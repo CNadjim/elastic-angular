@@ -1,5 +1,3 @@
 server.port: 5601
 server.host: "0.0.0.0"
 elasticsearch.url: "http://elasticsearch:9200"
-
-  I am currently in 5th year of study in computer science, we must for a project about the bigdata retrieve a flow of information from twitter in order to treat them thanks to the elasticsearch suite.

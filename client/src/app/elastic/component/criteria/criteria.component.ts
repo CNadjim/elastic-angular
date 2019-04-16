@@ -37,9 +37,10 @@ export class CriteriaComponent implements OnInit, OnDestroy {
     {
       label: 'Question 4',
       content: {
-        "constant_score" : {
-          "filter" : {
-            "terms" : { "date" : ["2017"]}
+        "match": {
+          "date": {
+            "query": "May 2017",
+            "operator": "and"
           }
         }
       }
@@ -60,6 +61,113 @@ export class CriteriaComponent implements OnInit, OnDestroy {
         }
       }
     },
+    {
+      label: 'Question 8',
+      content: {
+        "bool": {
+          "must": [{
+            "match": {
+              "content": "search"
+            }
+          }, {
+            "match": {
+              "content": "search analytics"
+            }
+          }, {
+            "match": {
+              "content": {
+                "query": "search analytics",
+                "operator": "and"
+              }
+            }
+          }]
+        }
+      }
+    },
+    {
+      label: 'Question 8.1',
+      content: {
+        "match": {
+          "content": "search"
+        }
+      }
+    },
+    {
+      label: 'Question 8.2',
+      content: {
+        "match": {
+          "content": {
+            "query": "search analytics",
+            "operator" : "or"
+          }
+        }
+      }
+    },
+    {
+      label: 'Question 8.3',
+      content: {
+        "match": {
+          "content": {
+            "query": "search analytics",
+            "operator" : "and"
+          }
+        }
+      }
+    },
+    {
+      label: 'Question 9',
+      content: {
+        "match_phrase": {
+          "content": {
+            "query": "search analytics"
+          }
+        }
+      }
+    },
+    {
+      label: 'Question 10',
+      content: {
+        "match_phrase": {
+          "content": {
+            "query": "search analytics",
+            "slop": 1
+          }
+        }
+      }
+    },
+    {
+      label: 'Question 11',
+      content: {
+        "bool": {
+          "must": [{
+            "match": {
+              "content": "performance optimizations improvements"
+            }
+          }]
+        }
+      }
+    },
+    {
+      label: 'Question 12',
+      content: {
+        "bool": {
+          "should": [{
+            "match": {
+              "content": "performance"
+            }
+          }, {
+            "match": {
+              "content": "optimizations"
+            }
+          }, {
+            "match": {
+              "content": "improvements"
+            }
+          }],
+          "minimum_should_match": 2
+        }
+      }
+    }
   ];
 
   constructor(private elasticService: ElasticService,
