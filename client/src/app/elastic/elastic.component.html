@@ -1,32 +1,39 @@
+<ng-container *ngIf="show; else loader">
+  <as-split gutterSize="20" [useTransition]="true" direction="horizontal"  >
 
-<as-split gutterSize="20" [useTransition]="true" direction="horizontal"  >
+    <as-split-area [size]="40" [visible]="criteriaVisible" order="1">
 
-  <as-split-area [size]="40" [visible]="criteriaVisible" order="1">
+      <mat-toolbar class="criteria-toolbar mat-elevation-z1" fxLayoutAlign="flex-end center">
+        <div fxFlex="1 0 auto">
+          Elasticsearch configuration
+        </div>
+        <button mat-icon-button *ngIf="criteriaVisible" (click)="criteriaVisible = false">
+          <mat-icon>keyboard_arrow_left</mat-icon>
+        </button>
+      </mat-toolbar>
 
-    <mat-toolbar class="criteria-toolbar mat-elevation-z1" fxLayoutAlign="flex-end center">
-      <div fxFlex="1 0 auto">
-        Elasticsearch configuration
-      </div>
-      <button mat-icon-button *ngIf="criteriaVisible" (click)="criteriaVisible = false">
-        <mat-icon>keyboard_arrow_left</mat-icon>
-      </button>
-    </mat-toolbar>
+      <app-criteria></app-criteria>
+    </as-split-area>
 
-    <app-criteria></app-criteria>
-  </as-split-area>
+    <as-split-area [size]="60" order="2">
 
-  <as-split-area [size]="60" order="2">
+      <mat-toolbar fxLayoutGap="20px" class="table-toolbar mat-elevation-z1">
+        <button mat-icon-button  (click)="criteriaVisible = !criteriaVisible">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <div fxFlex="1 0 auto" fxLayoutAlign="center center">
+          Elasticsearch result
+        </div>
+      </mat-toolbar>
 
-    <mat-toolbar fxLayoutGap="20px" class="table-toolbar mat-elevation-z1">
-      <button mat-icon-button  (click)="criteriaVisible = !criteriaVisible">
-        <mat-icon>menu</mat-icon>
-      </button>
-      <div fxFlex="1 0 auto" fxLayoutAlign="center center">
-        Elasticsearch result
-      </div>
-    </mat-toolbar>
+      <app-table></app-table>
 
-    <app-table></app-table>
+    </as-split-area>
+  </as-split>
 
-  </as-split-area>
-</as-split>
+</ng-container>
+<ng-template #loader>
+  <div fxFlex="0 0 80px">
+    <app-loader></app-loader>
+  </div>
+</ng-template>

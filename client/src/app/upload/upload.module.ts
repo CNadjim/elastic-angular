@@ -9,6 +9,7 @@ import { StepUploadComponent } from './component/step-upload/step-upload.compone
 import {NgxDropzoneModule} from "ngx-dropzone";
 import {PapaParseModule} from "ngx-papaparse";
 import {AngularSplitModule} from "angular-split";
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 const routes: Routes = [
   {
@@ -23,6 +24,7 @@ const routes: Routes = [
   imports: [
     SharedModule,
     CommonModule,
+    FlexLayoutModule,
     RouterModule.forChild(routes),
     AngularSplitModule,
     NgxDropzoneModule,

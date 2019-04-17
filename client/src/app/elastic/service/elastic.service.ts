@@ -36,27 +36,33 @@ export class ElasticService implements Resolve<Client> {
 
 
   search(): Promise<ElasticResult> {
-    return this.esClient.search(
-      {
-        index: this.index.value,
-        body: this.query.value
-      }
-    )
-      .then(res => {
-        this.elasticResult.next(res);
-        this.datasource.next(this.extractResult(res));
-      }).catch(error => {
-        this.datasource.next(null);
-        this.elasticResult.next(null);
-        this.snackBarService.show(SnackBarType.error, error);
-      })
+    return new Promise<ElasticResult>((resolve, reject) => {
+      this.esClient.search(
+        {
+          index: this.index.value,
+          body: this.query.value
+        }
+      )
+        .then(res => {
+          this.elasticResult.next(res);
+          this.datasource.next(this.extractResult(res));
+          resolve();
+        })
+        .catch(error => {
+          this.datasource.next(null);
+          this.elasticResult.next(null);
+          this.snackBarService.show(SnackBarType.error, error);
+          reject(error);
+        })
+    }) ;
+
   }
 
   insert(body: any): Promise<any> {
     return this.esClient.create(
       {
-        index: environment.index,
-        type: 'item',
+        index: this.index.value,
+        type: 'doc',
         id: body.title,
         body: body
       })
@@ -68,6 +74,23 @@ export class ElasticService implements Resolve<Client> {
       })
   }
 
+  bulk(body: any): Promise<any> {
+    return new Promise<ElasticResult>((resolve, reject) => {
+      this.esClient.bulk(
+        {
+          index: this.index.value,
+          type: 'doc',
+          body: body
+        })
+        .then(res => {
+          resolve();
+        })
+        .catch(error => {
+          this.snackBarService.show(SnackBarType.error, error);
+          reject(error);
+        })
+    });
+  }
 
 
   private extractResult(elasticResult: ElasticResult) {

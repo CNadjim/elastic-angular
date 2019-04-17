@@ -24,6 +24,7 @@ export class StepPreviewComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.data = null;
+    this.error = null;
     this.uploadService.file
       .pipe(takeUntil(this.unsubscribeAll))
       .subscribe(data => {
@@ -34,9 +35,13 @@ export class StepPreviewComponent implements OnInit, OnDestroy {
               delimiter: ';',
               newline: '\n',
                 complete: (results => {
-                  results.errors.length > 0 ? this.error = JSON.stringify(results.errors) : this.error = null;
-                  this.data = JSON.stringify(results.data);
-                  this.array = results.data;
+                  if(results.errors.length > 0 ){
+                    this.error = JSON.stringify(results.errors)
+                  }else{
+                    this.data = JSON.stringify(results.data);
+                    this.array = results.data;
+                    this.send();
+                  }
                 })
             })
 

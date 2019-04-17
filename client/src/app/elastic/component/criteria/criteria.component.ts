@@ -62,6 +62,17 @@ export class CriteriaComponent implements OnInit, OnDestroy {
       }
     },
     {
+      label: 'Question 7',
+      content: {
+        "match": {
+          "title": {
+            "query": "elastic stack",
+            "operator": "and"
+          }
+        }
+      }
+    },
+    {
       label: 'Question 8',
       content: {
         "bool": {

@@ -1,5 +1,24 @@
-version: "2"
+version: "3"
 services:
+
+#  client:
+#    image: 'node:latest'
+#    volumes:
+#      - './client:/home/node/app'
+#    working_dir: /home/node/app/client
+#    ports:
+#      - "4200:4200"
+#    command:
+#      - /bin/sh
+#      - '-c'
+#      - 'npm install && npm install -g @angular/cli@1.7.1 && ng serve --host 0.0.0.0'
+
+  client:
+    build: ./client
+    container_name: client
+    ports:
+      - "8080:80"
+
   elasticsearch:
     container_name: elasticsearch
     build: ./elasticsearch/
@@ -12,17 +31,6 @@ services:
       - ./elasticsearch/data:/usr/share/elasticsearch/data
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
 
-#  logstash:
-#    container_name: logstash
-#    build: ./logstash/
-#    command: -f /etc/logstash/conf.d/
-#    volumes:
-#      - ./logstash/config:/etc/logstash/conf.d
-#    ports:
-#      - "9999:9999"
-#    links:
-#      - elasticsearch
-#
   kibana:
     container_name: kibana
     build: ./kibana/
@@ -30,5 +38,6 @@ services:
       - ./kibana/config/:/opt/kibana/config/
     ports:
       - "5601:5601"
-    links:
+    depends_on:
       - elasticsearch
+

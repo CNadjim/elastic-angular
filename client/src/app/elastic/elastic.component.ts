@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ElasticService} from "./service/elastic.service";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -10,13 +11,22 @@ import {ElasticService} from "./service/elastic.service";
 export class ElasticComponent implements OnInit {
 
   public criteriaVisible:boolean;
-
-  constructor(private elasticService: ElasticService) {
+  public show : boolean;
+  constructor(private elasticService: ElasticService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
+    this.show = false;
     this.criteriaVisible = true;
-    this.elasticService.search();
+    this.elasticService.search().then(res => {
+      this.show = true;
+    })
+      .catch(error => {
+      if(error.status == 404){
+        this.router.navigate(['upload']);
+      }
+    })
   }
 
 }

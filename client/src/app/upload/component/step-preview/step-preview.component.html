@@ -36,5 +36,8 @@
 </ng-container>
 
 <ng-template #loader>
-  <app-loader></app-loader>
+  <div fxFlex="0 0 80px" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="30px">
+    <span>Checking of the data</span>
+    <app-loader></app-loader>
+  </div>
 </ng-template>

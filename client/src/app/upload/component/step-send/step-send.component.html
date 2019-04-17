@@ -1,6 +1,12 @@
-<ng-container *ngIf="loading; else loader">
-  done
+<ng-container *ngIf="!loading; else loader">
+  <div>
+        <pre [textContent]="error">
+        </pre>
+  </div>
 </ng-container>
 <ng-template #loader>
-  <app-loader></app-loader>
+  <div fxFlex="0 0 80px" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="30px">
+    <span>Inserting the data...</span>
+    <app-loader></app-loader>
+  </div>
 </ng-template>
