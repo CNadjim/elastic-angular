@@ -43,7 +43,6 @@ export class StepSendComponent implements OnInit, OnDestroy {
           header.create._type = "doc";
           body += JSON.stringify(header) + "\n" + JSON.stringify(item) + "\n";
         }
-        console.log(body);
         this.elasticService.bulk(body)
           .then(res => {
               setTimeout(() => {

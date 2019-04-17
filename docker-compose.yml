@@ -14,7 +14,7 @@ services:
 #      - 'npm install && npm install -g @angular/cli@1.7.1 && ng serve --host 0.0.0.0'
 
   client:
-    build: ./client
+    image: nadjim/elastic-client
     container_name: client
     ports:
       - "8080:80"
